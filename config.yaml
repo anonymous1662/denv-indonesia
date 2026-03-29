@@ -1,0 +1,41 @@
+# Model set up parameters
+run_name: "test5"
+n_particles: 500
+scenario_start: 2025
+scenario_years: 15
+calibration_years: 150
+burden_out: ["sim_year", "inf_cumulative",  "cases_cumulative", "hosp_cumulative", "deaths_cumulative", "vacc_cumulative", "S", "rt_region", "annual_foi_region", "vacc_cases_cumulative","vacc_hosp_cumulative","vacc_deaths_cumulative"]
+reduce_output: FALSE
+output_interval: "year" 
+scenario_names: ["baseline","vaccine_national", "wolbachia", "wolbachia_vaccine_national"]
+
+# Disease parameters
+gamma: 0.2 # rate of leaving I - so infection modelled as lasting 5 days
+# symp_prop and hosp_prob both stratified by number of previous infections 0-3
+symp_prop: [0.214,0.583,0.288,0.288] # probability of symptomatic infection | infection
+hosp_prop: [0.09, 0.09, 0.09, 0.09] # probability of hospitalisation | symptomatic infection
+amp_seas: 0.2 # Amplitude of seasonality
+phase_seas: 1.56 # Parameter to phase seasonality
+seeding_value: 100 # total seeding value for country, appoprtioned to each region based on population
+
+# Vaccination parameters
+vacc_on: 0 # binary switch to control whether vaccination is modelled
+vacc_start: 1 # starts on day 1 after the equilibration period
+catch_up_duration: 1095.0 # in days (3 years of catch-up)
+vacc_coverage: 0.6
+
+# Efficacy stratified by serostatus: seronegative, seropositive
+ve_inf: [0.0,0.0] # overall vaccine efficacy against infection (remember must be double not integer i.e. 0.0)
+ve_symp: [0.54, 0.65] # overall vaccine efficacy against symptomatic disease (from Rivera et al 2021, 3 year efficacy data in safety set)
+ve_hosp: [0.77, 0.86] # overall vaccine efficacy against hospitalisation
+ve_death: [1.0,1.0] # overall vaccine efficacy against death
+
+vacc_age: 11 # note this is age + 1 so first age group is 10
+catch_up_age: [11,12,13,14,15,16,17] # note this is age + 1 so first age group is 10
+ve_wane: 10.0 # duration of vaccine protection in years
+
+# Wolbachia parameters
+wol_on: 0 # binary switch to control whether Wolbachia is modelled
+wol_start: 1 # starts on day 1 after the equilibration period
+wol_reduction: 0.5 # fractional reduction in transmission due to Wolbachia
+n_wol_regions: 100 # number of regions to deploy Wolbachia
